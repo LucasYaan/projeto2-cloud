@@ -10,6 +10,64 @@ A Faculdade de Computação e Informática (FCI) realiza, ao longo do semestre, 
 Para gestores, organizadores, participantes e equipes de apoio da FCI que precisam planejar, divulgar, organizar e registrar eventos acadêmicos, o Sistema de Gestão de Eventos e Auditórios é uma plataforma de apoio à gestão que centraliza o ciclo dos eventos, desde o cadastro e planejamento de espaços até inscrição, presença, certificação, registro de atividades complementares e armazenamento de evidências.  
 <br/>Diferentemente de processos manuais ou ferramentas desconectadas, a solução deverá manter as informações relacionadas em um fluxo integrado, oferecendo aos organizadores uma visão operacional e gerencial dos eventos e aos participantes uma visão clara das atividades disponíveis, suas inscrições, presença e certificados.
 
+---
+
+## Personas
+
+| Persona | Stakeholders representados |
+| --- | --- |
+| Administrador/Gestor | Profa. Regiane e Profa. Cássia (coordenação de extensão) |
+| Organizador/Equipe de apoio | Prof. Joaquim (apoio à coordenação), voluntários e equipes de apoio |
+| Participante | Alunos da FCI e participantes de outras unidades da universidade |
+
+---
+
+### Administrador/Gestor
+
+**Quem é:** responsável pela gestão dos eventos da FCI. Planeja o calendário, define os espaços e acompanha a realização das atividades. Está representado pela direção da FCI, que tem interesse na visão gerencial, nos registros dos eventos e nos relatórios de gestão, e pela coordenação de extensão, que organiza e acompanha os eventos.
+
+**Objetivos:**
+- Cadastrar locais e eventos sem conflito de horário e respeitando a capacidade das salas.
+- Manter as informações dos eventos atualizadas e cancelar o que não será realizado.
+- Ter uma visão gerencial confiável da ocupação dos espaços e dos eventos.
+
+**Dores:**
+- A divulgação e a organização estão dispersas entre WhatsApp, Moodle e processos manuais.
+- Risco de agendar duas atividades no mesmo local e horário.
+- Esforço operacional alto e dificuldade de consolidar o que ocorreu em cada atividade.
+
+---
+
+### Organizador/Equipe de apoio
+
+**Quem é:** pessoa que ajuda na operação dos eventos, sob as permissões que o Administrador atribui. Está representada pelo apoio à coordenação de extensão e pelos voluntários e equipes de apoio.
+
+**Objetivos:**
+- Ajustar dados de um evento (data, horário, vagas, situação) ao longo do ciclo de vida dele.
+- Cancelar eventos ou atividades quando necessário.
+- Anexar fotos como evidência do que foi realizado, associadas ao evento correto.
+
+**Dores:**
+- Evidências e registros exigem procedimentos separados.
+- Falta de um lugar único para guardar o que aconteceu em cada atividade.
+
+---
+
+### Participante
+
+**Quem é:** quem participa dos eventos. O perfil principal é o aluno da FCI. Participantes de outras unidades da universidade usam o mesmo perfil, com acesso conforme as regras de cada atividade.
+
+**Objetivos:**
+- Ver, num só lugar, quais eventos e atividades estão disponíveis, com data, horário, local e vagas.
+- Entender o que cada evento oferece antes de se inscrever.
+- Garantir a vaga, acompanhar suas inscrições e cancelar quando não puder ir.
+
+**Dores:**
+- Informações espalhadas por canais diferentes, sem visão única do que está disponível.
+- Dificuldade de saber se ainda há vaga e qual é a situação da própria inscrição.
+
+---
+
 ## User Stories
 
 ### US01 — Reservar e gerenciar local (salas/auditórios)
