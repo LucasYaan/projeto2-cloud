@@ -322,9 +322,3 @@ O painel gerencial consome GET /relatorios/ocupacao, exposto no API Gateway e im
 **User Stories**: US01 a US10
 
 O protótipo em HTML/CSS/JS do sistema (telas de catálogo, evento/atividade, "Minha área", administração de locais e eventos, evidências e painel gerencial) é publicado como site estático no S3 (static website hosting). O front-end consome a API por um endereço configurável (config.js), sem URL fixa no código.
-
-### RF-05 — Front-end web publicado consumindo a API
-
-**User Stories:** US01 a US10
-
-O protótipo em HTML/CSS/JS do sistema (telas de catálogo, evento/atividade, "Minha área", administração de locais e eventos, evidências e painel gerencial) é publicado como site estático no S3 (static website hosting). O front-end consome a API por um endereço configurável (config.js), sem URL fixa no código.
