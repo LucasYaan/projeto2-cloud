@@ -1,0 +1,11 @@
+{
+  "name": "eventos-api",
+  "version": "1.0.0",
+  "description": "Lambda da API do Sistema de Gestão de Eventos FCI (CRUD no RDS)",
+  "type": "module",
+  "main": "index.mjs",
+  "private": true,
+  "dependencies": {
+    "pg": "^8.13.1"
+  }
+}
