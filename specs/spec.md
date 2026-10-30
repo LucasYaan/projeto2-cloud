@@ -158,7 +158,7 @@ Para gestores, organizadores, participantes e equipes de apoio da FCI que precis
 - **Regras de negócio:**
    - Um evento cancelado deve liberar o local associado no período correspondente.
    - Participantes inscritos devem ter sua situação de inscrição atualizada (ex.: para "cancelado") quando o evento/atividade for cancelado.
-- **Diferenças de permissão:** Administrador/Gestor e Organizador/Equipe de apoio podem cancelar eventos ou atividades, conforme as permissões atribuídas ao Organizador para cada evento — mesma ressalva de escopo da US05.
+- **Diferenças de permissão:** Administrador/Gestor e Organizador/Equipe de apoio podem cancelar eventos ou atividades, conforme as permissões atribuídas ao Organizador para cada evento — mesma ressalva de escopo da US03.
 
 ---
 
@@ -176,7 +176,7 @@ Para gestores, organizadores, participantes e equipes de apoio da FCI que precis
 - **Erros e impedimentos:** O sistema deve informar claramente quando não houver eventos/atividades disponíveis no momento da consulta.
 - **Ausência de dados:** Quando informações de localização não se aplicarem (ex.: atividade digital), o sistema deve omitir esse campo ou exibir o link/plataforma no lugar.
 - **Regras de negócio:**
-   - Eventos cancelados ou encerrados não devem aparecer como "disponíveis" no catálogo (podem aparecer no histórico, US27).
+   - Eventos cancelados ou encerrados não devem aparecer como "disponíveis" no catálogo.
 - **Diferenças de permissão:** Catálogo visível a todos os perfis autenticados; participantes têm acesso de consulta, sem opções administrativas.
 
 ---
@@ -214,7 +214,7 @@ Para gestores, organizadores, participantes e equipes de apoio da FCI que precis
 - **Erros e impedimentos:**
    - O sistema deve impedir inscrições duplicadas do mesmo participante na mesma atividade.
    - O sistema deve impedir novas inscrições quando a atividade estiver encerrada, fechada ou realizada.
-- **Ausência de dados:** Quando não houver vaga disponível, o sistema não deve confirmar a inscrição diretamente, direcionando o participante para a fila de espera (US11), se habilitada.
+- **Ausência de dados:** Quando não houver vaga disponível, o sistema não confirma a inscrição e informa ao participante que a atividade está lotada. A fila de espera **não faz parte do escopo desta entrega**: o participante que ficou sem vaga precisa tentar a inscrição novamente caso uma vaga seja liberada.
 - **Regras de negócio:**
    - O número de inscrições confirmadas não deve ultrapassar a quantidade de vagas definida.
    - Um participante não pode possuir mais de uma inscrição ativa na mesma atividade.
@@ -226,17 +226,17 @@ Para gestores, organizadores, participantes e equipes de apoio da FCI que precis
 
 **Papel ou tipo de usuário:** Participante
 
-**Objetivo:** Como Participante, quero consultar minhas inscrições e reservas em uma área pessoal, para acompanhar minha situação (confirmado, em espera, cancelado, concluído) em cada atividade.
+**Objetivo:** Como Participante, quero consultar minhas inscrições e reservas em uma área pessoal, para acompanhar minha situação (confirmado, cancelado, concluído) em cada atividade.
 
 **Benefício ou razão da necessidade:** Para ter uma visão organizada da minha participação, sem precisar recorrer a canais externos.
 
 **Critérios de aceitação:**
-- **Fluxo principal:** Participante acessa sua área pessoal; o sistema exibe a lista de inscrições/reservas com a situação atual de cada uma (confirmado, em espera, cancelado, concluído).
+- **Fluxo principal:** Participante acessa sua área pessoal; o sistema exibe a lista de inscrições/reservas com a situação atual de cada uma (confirmado, cancelado, concluído).
 - **Situações alternativas:** Participante pode consultar informações necessárias para participação (ex.: link de acesso, local) diretamente a partir da inscrição confirmada.
 - **Erros e impedimentos:** O sistema deve informar claramente quando o participante não possuir nenhuma inscrição registrada.
 - **Ausência de dados:** Não aplicável.
 - **Regras de negócio:**
-   - A área pessoal deve refletir os estados definidos em F08 (confirmado, em espera, cancelado, concluído).
+   - A área pessoal deve refletir a situação da inscrição: confirmado, cancelado ou concluído.
 - **Diferenças de permissão:** Cada participante só pode consultar suas próprias inscrições.
 
 ---
@@ -247,15 +247,15 @@ Para gestores, organizadores, participantes e equipes de apoio da FCI que precis
 
 **Objetivo:** Como Participante, quero cancelar minha inscrição em uma atividade quando isso for permitido, para liberar minha vaga caso eu não possa mais participar.
 
-**Benefício ou razão da necessidade:** Para permitir que outra pessoa da fila de espera ocupe a vaga liberada e manter minha área pessoal atualizada.
+**Benefício ou razão da necessidade:** Para permitir que outra pessoa ocupe a vaga liberada e manter minha área pessoal atualizada.
 
 **Critérios de aceitação:**
 - **Fluxo principal:** Participante seleciona uma inscrição confirmada e solicita o cancelamento; o sistema atualiza a situação da inscrição para "cancelado" e libera a vaga.
-- **Situações alternativas:** Quando houver fila de espera, a vaga liberada deve ser oferecida automaticamente ao próximo participante elegível.
-- **Erros e impedimentos:** O sistema deve impedir o cancelamento quando essa opção não estiver habilitada pelo organizador para a atividade em questão.
+- **Situações alternativas:** Após o cancelamento, a vaga liberada volta a ficar disponível para novas inscrições.
+- **Erros e impedimentos:** O sistema deve impedir o cancelamento quando o evento não permitir o cancelamento de inscrições (campo `permite_cancelamento` do evento, definido pelo organizador).
 - **Ausência de dados:** Motivo do cancelamento pode ser opcional.
 - **Regras de negócio:**
-   - Cancelamento só é permitido quando definido pelo organizador para a atividade (F06).
+   - O cancelamento só é permitido quando o campo `permite_cancelamento` do evento está ativo; o organizador o define ao cadastrar ou alterar o evento (US02 e US03).
 - **Diferenças de permissão:** Participante só pode cancelar a própria inscrição.
 
 ---
@@ -291,19 +291,22 @@ O domínio tem duas relações:
 - **Evento ↔ Participante (N:N), pela entidade Inscrição:** um participante se inscreve em vários eventos e um evento tem vários inscritos.
 
 Operações de cada entidade:
+
 | Entidade | Criar | Consultar | Alterar | Remover |
 | --- | --- | --- | --- | --- |
 | Local | US01 | US01 | US01 | US01 |
-| Evento/Atividade | US02 | US03, US05, US06 | US03 | US04 |
+| Evento/Atividade | US02 | US03, US05, US06 | US03 | US04 (cancelamento) e exclusão definitiva |
 | Inscrição | US07 | US08 | — | US09 |
 
-Os dados ficam em um banco relacional Supabase (PostgreSQL) no Amazon RDS.
+A remoção de um evento tem duas formas: o **cancelamento** (US04), que mantém o registro com a situação "cancelado", e a **exclusão definitiva** (`DELETE /eventos/:id`), permitida apenas quando o evento não tem inscrições ativas. A exclusão definitiva não tem user story própria nesta entrega.
+
+Os dados ficam em um banco PostgreSQL no Amazon RDS.
 
 ### RF-02 — Upload de arquivo ligado a uma entidade, armazenado no S3 via URL pré-assinada
 
 **User Stories**: US10
 
-O Organizador anexa fotos a um evento/atividade. O front-end pede ao backend uma URL pré-assinada para aquele evento; o backend a gera e o navegador envia a imagem direto ao S3, sem passar pelo servidor. Em seguida, o backend registra o arquivo (chave no S3, legenda opcional, evento relacionado) no RDS, mantendo a evidência ligada ao evento (RN14). O backend rejeita formatos que não sejam imagem válida (ex.: JPEG e PNG).
+O Organizador anexa fotos a um evento/atividade. O front-end pede ao backend uma URL pré-assinada para aquele evento; o backend a gera e o navegador envia a imagem direto ao S3, sem passar pelo servidor. Em seguida, o backend registra o arquivo (chave no S3, legenda opcional, evento relacionado) no RDS, mantendo a evidência ligada ao evento. O backend rejeita formatos que não sejam imagem válida (ex.: JPEG e PNG).
 
 ### RF-03 — Arquivo novo no S3 dispara uma Lambda que grava o resultado no RDS
 
